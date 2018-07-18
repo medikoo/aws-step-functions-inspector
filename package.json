@@ -1,6 +1,6 @@
 {
   "name": "aws-step-functions-inspector",
-  "version": "2.3.0",
+  "version": "1.0.0",
   "description": "Inspect AWS Step Functions state machines ",
   "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
   "keywords": [
