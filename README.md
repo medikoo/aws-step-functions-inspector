@@ -20,10 +20,6 @@ Supported options:
 -   **--help -h** - Show usage info
 -   **--version -v** - Display version
 
-### Tests
-
-    $ npm test
-
 [nix-build-image]: https://semaphoreci.com/api/v1/medikoo-org/aws-step-functions-inspector/branches/master/shields_badge.svg
 [nix-build-url]: https://semaphoreci.com/medikoo-org/aws-step-functions-inspector
 [transpilation-image]: https://img.shields.io/badge/transpilation-free-brightgreen.svg
