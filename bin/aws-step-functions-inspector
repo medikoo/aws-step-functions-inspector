@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+
+"use strict";
+
+Error.stackTraceLimit = Infinity;
+process.on("unhandledRejection", reason => { throw reason; });
+
+const meta = require("../package")
+    , argv = require("minimist")(process.argv.slice(2));
+
+const usage = `aws-step-functions-inspector v${ meta.version } - Dumps state machine events
+
+Usage: aws-step-functions-inspector arn {OPTIONS}
+
+Existence of AWS_PROFILE and AWS_REGION enviromnment variables should be ensured
+
+Options:
+
+    --version, -v  Display version
+    --help,    -h  Show this message
+    --reverse      Outputs events in reverse order
+
+`;
+
+if (argv.h || argv.help) {
+	process.stdout.write(usage);
+	return;
+}
+
+if (argv.v || argv.version) {
+	process.stdout.write(`${ meta.version }\n`);
+	return;
+}
+
+if (!process.env.AWS_PROFILE) {
+	process.stderr.write(`AWS_PROFILE env variable should be set\n\n${ usage }`);
+	process.exit(1);
+}
+if (!process.env.AWS_REGION) {
+	process.stderr.write(`AWS_REGION env variable should be set\n\n${ usage }`);
+	process.exit(1);
+}
+
+const [arn] = argv._;
+
+if (!arn) {
+	process.stderr.write(`Provide step functions ARN\n\n${ usage }`);
+	process.exit(1);
+}
+
+require("../")({ region: process.env.AWS_REGION, arn, reverse: argv.reverse });
